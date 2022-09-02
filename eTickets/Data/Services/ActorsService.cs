@@ -12,9 +12,10 @@ namespace eTickets.Data.Services
             _context = context;
         }
 
-        public void Add(Actor actor)
+        public async Task Add(Actor actor)
         {
-            throw new NotImplementedException();
+            _context.Actors.Add(actor);
+            await _context.SaveChangesAsync();
         }
 
         public void Delete(int id)
@@ -29,9 +30,10 @@ namespace eTickets.Data.Services
             return actors;
         }
 
-        public Actor GetById(int id)
+        public async Task<Actor> GetById(int id)
         {
-            throw new NotImplementedException();
+            var actor = await _context.Actors.FirstOrDefaultAsync(a => a.Id == id);
+            return actor;
         }
 
         public Actor Update(int id, Actor newActor)
