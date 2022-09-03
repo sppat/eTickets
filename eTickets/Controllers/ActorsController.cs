@@ -1,8 +1,6 @@
-﻿using eTickets.Data;
-using eTickets.Data.Services;
+﻿using eTickets.Data.Services;
 using eTickets.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace eTickets.Controllers
 {
@@ -17,7 +15,7 @@ namespace eTickets.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var data = await _actorsService.GetAll();
+            var data = await _actorsService.GetAllAsync();
 
             return View(data);
         }
@@ -36,7 +34,7 @@ namespace eTickets.Controllers
                 return View(actor);
             }
 
-            await _actorsService.Add(actor);
+            await _actorsService.AddAsync(actor);
 
             return RedirectToAction(nameof(Index));
         }
@@ -44,13 +42,56 @@ namespace eTickets.Controllers
         // GET /actors/details/1
         public async Task<IActionResult> Details(int id)
         {
-            var actorDetails = await _actorsService.GetById(id);
+            var actorDetails = await _actorsService.GetByIdAsync(id);
             if (actorDetails == null)
             {
-                return View("Empty");
+                return View("NotFound");
             }
 
             return View(actorDetails);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var actor = await _actorsService.GetByIdAsync(id);
+            if (actor == null)
+            {
+                return View("NotFound");
+            }
+
+            return View(actor);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            await _actorsService.DeleteAsync(id);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var actorDetails = await _actorsService.GetByIdAsync(id);
+            if (actorDetails == null)
+            {
+                return View("NotFound");
+            }
+
+            return View(actorDetails);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, Actor actor)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(actor);
+            }
+
+            await _actorsService.UpdateAsync(id, actor);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
