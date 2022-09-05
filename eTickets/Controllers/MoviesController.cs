@@ -1,7 +1,5 @@
-﻿using eTickets.Data;
-using eTickets.Data.Services;
+﻿using eTickets.Data.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace eTickets.Controllers
 {
@@ -23,5 +21,7 @@ namespace eTickets.Controllers
 
             return View(movie);
         }
+
+        public IActionResult Create() => View();
     }
 }

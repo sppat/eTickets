@@ -1,5 +1,4 @@
-﻿using eTickets.Models;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 namespace eTickets.Data.Base
 {

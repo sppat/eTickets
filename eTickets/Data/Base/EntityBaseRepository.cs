@@ -1,5 +1,4 @@
-﻿using eTickets.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace eTickets.Data.Base
@@ -16,7 +15,7 @@ namespace eTickets.Data.Base
         public async Task AddAsync(T entity)
         {
             _context.Set<T>().Add(entity);
-            
+
             await _context.SaveChangesAsync();
         }
 

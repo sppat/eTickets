@@ -1,8 +1,6 @@
-﻿using eTickets.Data;
-using eTickets.Data.Services;
+﻿using eTickets.Data.Services;
 using eTickets.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace eTickets.Controllers
 {
@@ -20,7 +18,7 @@ namespace eTickets.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var producer = await _producersService.GetByIdAsync(id);
-            if (producer == null) 
+            if (producer == null)
                 return View("Not Found");
 
             return View(producer);
