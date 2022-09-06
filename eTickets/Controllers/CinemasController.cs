@@ -27,6 +27,7 @@ namespace eTickets.Controllers
         public IActionResult Create() => View();
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Cinema cinema)
         {
             if (!ModelState.IsValid)
@@ -49,6 +50,7 @@ namespace eTickets.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Cinema newCinema)
         {
             if (!ModelState.IsValid)

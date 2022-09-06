@@ -27,6 +27,7 @@ namespace eTickets.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FullName, Bio, ProfilePictureUrl")] Actor actor)
         {
             if (!ModelState.IsValid)
@@ -82,6 +83,7 @@ namespace eTickets.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Actor actor)
         {
             if (!ModelState.IsValid)
